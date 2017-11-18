@@ -1,0 +1,103 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+int getA();
+int getB();
+int getC();
+int discriminant(int a, int b, int c);
+int minusBoverTwoA(int a, int b, int c);
+int sqrtDisc(int a, int b, int c);
+int solve(int a, int b, int c);
+int again();
+int main()
+{
+    int a,b,c;
+    do
+    {
+        a = getA();
+       b = getB();
+       c = getC();
+       solve(a,b,c);
+    }
+ while(again());
+       return 0;
+}
+int getA()
+{
+
+    double a;
+    cout<<"Please enter the value of the coefficient \'a\': ";
+    cin>>a;
+    return a;
+
+}
+
+int getB()
+    {
+
+        double b;
+        cout<<"Please enter the value of the coefficient \'b\': ";
+        cin>>b;
+        return b;
+    }
+    int getC()
+    {
+            double c;
+            cout<<"Please enter the value of the coefficient \'c\': ";
+            cin>>c;
+        return c;
+        }
+int discriminant(int a, int b, int c)
+{
+    return b*b - 4 * a * c;
+}
+
+int minusBoverTwoA(int a, int b)
+{
+    return -b / (a+a);
+}
+
+int sqrtDisc(int a, int b, int c)
+{
+    return sqrt(abs(discriminant(a,b,c)));
+}
+int solve(int a, int b, int c)
+{
+    cout<<endl<<"Your discriminant is "<<discriminant(a,b,c)<<endl;
+    if(discriminant(a,b,c) < 0)
+     //Imaginary solutions
+     {
+         double real = minusBoverTwoA(a,b);
+         cout<<"You have two imaginary roots. They are x = ";
+         if(b != 0)
+             cout<<real;
+         cout<<" +/- "<<sqrtDisc(a,b,c)/(a+a)<<"i"<<endl;
+     }
+     else
+         if(discriminant(a,b,c) > 0)
+         {//Two real solutions
+            double x1, x2;
+            x1 = (-b + sqrtDisc(a,b,c))/(a+a);
+            x2 = (-b - sqrtDisc(a,b,c))/(a+a);
+            cout<<"You have two real roots. They are x = "<<x1<<" and x = "<<x2<<endl;
+         }
+         else
+            cout<<"You have one real solution of x = "
+            <<minusBoverTwoA(a,b)<<endl;
+     cout<<endl;
+return 0;
+}
+int again()
+{
+    {
+        char ans;
+        cout<<"Do you want to use this again? ";
+        cin>>ans;
+        if (ans =='y' || ans =='Y')
+        return true;
+        else
+        return false;
+    }
+}
